@@ -4,6 +4,8 @@
 
 This is a training project with the aim of analysing disaster data from Figure Eight and creating a model that classifies disaster messages. The project consists of 3 stages (ETL Pipeline, ML Pipeline, and web application) that upload and clean the initial data, classify it according to the task and then upload as an app.
 
+Note: long training time
+
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
