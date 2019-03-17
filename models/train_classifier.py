@@ -11,6 +11,7 @@ from sklearn.metrics import fbeta_score, make_scorer
 from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.multioutput import MultiOutputClassifier
 import pickle
 nltk.download('punkt')
@@ -57,10 +58,9 @@ def build_model():
                      ('clf', MultiOutputClassifier(RandomForestClassifier()))
                      ])
                      
-    parameters = {
-        'clf__estimator__n_estimators': [50, 200],
-        
-} 
+    parameters = {'clf__estimator__n_estimators': [25, 50],
+                         'clf__estimator__min_samples_split': [2, 3] 
+    }
               
     cv = GridSearchCV(pipeline, param_grid=parameters, verbose=1)
     
@@ -75,13 +75,16 @@ def evaluate_model(model, X_test, Y_test, category_names):
     Input: the trained model, test part of X, test part of Y, names of column in Y
     Outpur: classification report and accuracy score
     """
-    y_pred = model.predict(X_test)
+    Y_pred = model.predict(X_test)
     
-    # print classification report
-    print(classification_report(Y_test.values, y_pred, target_names=category_names))
-
-    # print accuracy score
-    print('Accuracy: {}'.format(np.mean(Y_test.values == y_pred)))
+        # Print accuracy, precision, recall and f1_score for each categories
+    for i in range(0, len(category_names)):
+        print(category_names[i])
+        print("\tAccuracy: {:.3f}\t\t% Precision: {:.3f}\t\t% Recall: {:.3f}\t\t% F1_score: {:.3f}".format(
+            accuracy_score(Y_test[:, i], Y_pred[:, i]),
+            precision_score(Y_test[:, i], Y_pred[:, i], average='weighted'),
+            recall_score(Y_test[:, i], Y_pred[:, i], average='weighted'),
+            f1_score(Y_test[:, i], Y_pred[:, i], average='weighted')))
 
 def save_model(model, model_filepath):
     '''
