@@ -27,9 +27,9 @@ def load_data(database_filepath):
     
     engine = create_engine('sqlite:///'+ database_filepath)
     df = pd.read_sql_table('disaster_messages',engine)
-    X = df['message']
-    Y = df.drop(['id','message','original','genre'], axis=1)  
-    category_names = Y.columns.tolist()
+    X = df['message'].values
+    Y = df.drop(['id','message','original','genre'], axis=1).values
+    category_names = df.columns[4:]
     
     return X, Y, category_names
 
@@ -59,7 +59,7 @@ def build_model():
                      ])
                      
     parameters = {'clf__estimator__n_estimators': [25, 50],
-                         'clf__estimator__min_samples_split': [2, 3] 
+                         'clf__estimator__min_samples_split': [2,3] 
     }
               
     cv = GridSearchCV(pipeline, param_grid=parameters, verbose=1)
