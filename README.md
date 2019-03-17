@@ -1,5 +1,9 @@
 # Disaster Response Pipeline Project
 
+### Description
+
+This is a training project with the aim of analysing disaster data from Figure Eight and creating a model that classifies disaster messages. The project consists of 3 stages (ETL Pipeline, ML Pipeline, and web application) that upload and clean the initial data, classify it according to the task and then upload as an app.
+
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
@@ -12,3 +16,17 @@
     `python run.py`
 
 3. Go to http://0.0.0.0:3001/
+
+### Important files
+
+#### process_data.py : ETL Pipeline 
+    
+Actions: load and parse datasets, cleanse the data and store the data in a SQLite database.
+   
+#### train_classifier.py : ML Pipeline 
+
+Actions: load the data from SQLite database, splits the data into training and test sets, build a text processing and clssification pipeline, trains and tunes a model using GridSearchCV and exports the final model as a pickle file.
+    
+#### Run.py : Flask Web App 
+
+Actions: display the visualization (the app accept messages from users and returns classification results for 36 categories of disaster events).
