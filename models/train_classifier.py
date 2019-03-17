@@ -78,13 +78,13 @@ def evaluate_model(model, X_test, Y_test, category_names):
     Y_pred = model.predict(X_test)
     
         # Print accuracy, precision, recall and f1_score for each categories
-    for i in range(0, len(category_names)):
+    for x in range(0, len(category_names)):
         print(category_names[i])
         print("\tAccuracy: {:.3f}\t\t% Precision: {:.3f}\t\t% Recall: {:.3f}\t\t% F1_score: {:.3f}".format(
-            accuracy_score(Y_test[:, i], Y_pred[:, i]),
-            precision_score(Y_test[:, i], Y_pred[:, i], average='weighted'),
-            recall_score(Y_test[:, i], Y_pred[:, i], average='weighted'),
-            f1_score(Y_test[:, i], Y_pred[:, i], average='weighted')))
+            accuracy_score(Y_test[:, x], Y_pred[:, x]),
+            precision_score(Y_test[:, x], Y_pred[:, x], average='weighted'),
+            recall_score(Y_test[:,x], Y_pred[:, x], average='weighted'),
+            f1_score(Y_test[:, x], Y_pred[:, x], average='weighted')))
 
 def save_model(model, model_filepath):
     '''
