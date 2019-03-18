@@ -1,9 +1,11 @@
 import json
 import plotly
 import pandas as pd
+import string
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
 
 from flask import Flask
 from flask import render_template, request, jsonify
@@ -26,11 +28,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
+df = pd.read_sql_table('disaster_messages', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -39,10 +41,28 @@ model = joblib.load("../models/your_model_name.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
+    
+
+    # Counting messages by genre
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+
+    # Counting categories of messages
+    categories = df.drop(['original', 'genre','message','id'], axis =1)
+    categories_counts = categories.sum().sort_values(ascending=False)
+    categories_names = list(categories_counts.index)
     
+    # Counting most frequent words_from_df
+    words_from_df = pd.Series(' '.join(df['message']).lower().split())
+    redudant_words = stopwords.words("english") + list(string.punctuation) + [".."] 
+    words_from_df = words_from_df[~words_from_df.isin(redudant_words)] #Note: there are more effiecient ways to do that, but combining all strings in a list gives a lot of flexibility and readability
+    top_words_count = words_from_df.value_counts()[:15]
+    top_words_names = list(top_words_count.index)
+
+
+	
+	
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -55,7 +75,7 @@ def index():
             ],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Amount of messages in each genre',
                 'yaxis': {
                     'title': "Count"
                 },
@@ -63,7 +83,44 @@ def index():
                     'title': "Genre"
                 }
             }
-        }
+        },
+        {
+            'data': [
+                Bar(
+                    x=categories_names,
+                    y=categories_counts
+                )
+            ],
+
+            'layout': {
+                'title': 'Most Frequent Categories of Messages',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Categories"
+                }
+            }
+        },
+        {
+
+            'data': [
+                Bar(
+                    x=top_words_names,
+                    y=top_words_count
+                )
+            ],
+
+            'layout': {
+                'title': 'Most Frequent Words',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Words"
+                }
+            }
+}
     ]
     
     # encode plotly graphs in JSON
