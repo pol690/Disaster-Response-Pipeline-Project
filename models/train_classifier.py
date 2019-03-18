@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine
 import nltk
+import string
+
+
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -44,8 +47,10 @@ def tokenize(text):
     tokens = nltk.word_tokenize(text)
     lemmatizer = nltk.WordNetLemmatizer()
     lemmatized = [lemmatizer.lemmatize(w).lower().strip() for w in tokens]
+    stop_words = nltk.corpus.stopwords.words("english")
+    text_no_stop_words_punct = [t for t in lemmatized if t not in stop_words and t not in string.punctuation] #removes stop words and  punctuation
     
-    return lemmatized
+    return text_no_stop_words_punct
 
 
 def build_model():
@@ -62,7 +67,7 @@ def build_model():
                          'clf__estimator__min_samples_split': [2,3] 
     }
               
-    cv = GridSearchCV(pipeline, param_grid=parameters, verbose=1)
+    cv = GridSearchCV(pipeline, param_grid=parameters, verbose=1, n_jobs=-1)
     
     return cv
     
