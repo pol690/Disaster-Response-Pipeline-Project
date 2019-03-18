@@ -4,8 +4,6 @@
 
 This is a training project with the aim of analysing disaster data from Figure Eight and creating a model that classifies disaster messages. The project consists of 3 stages (ETL Pipeline, ML Pipeline, and web application) that upload and clean the initial data, classify it according to the task and then upload as an app.
 
-Note: long training time
-
 ### Installation
 
 The code contained in this repository was written in HTML and Python 3, and requires the following Python packages: json, plotly, pandas, nltk, flask, sklearn, sqlalchemy, sys, numpy, re, pickle, warnings
@@ -44,11 +42,14 @@ The used datasets are very unbalanced, with very few positive examples for some 
 
 This app must not be used for actual pridiction unless more data is collected.
 
+Additionally, the model training time can be improved.
+
 #### Screenshots
 
 ![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen1.png "Screenshot1")
 ![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen2.png "Screenshot2")
 ![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen3.png "Screenshot3")
+
 #### Licensing and Acknowledgements
 
 This app was developed as part of the Udacity Data Scientist Nanodegree.
