@@ -46,6 +46,9 @@ This app must not be used for actual pridiction unless more data is collected.
 
 #### Screenshots
 
+![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen1.png "Screenshot1")
+![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen2.png "Screenshot2")
+![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen3.png "Screenshot3")
 #### Licensing and Acknowledgements
 
 This app was developed as part of the Udacity Data Scientist Nanodegree.
