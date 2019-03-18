@@ -6,7 +6,12 @@ This is a training project with the aim of analysing disaster data from Figure E
 
 Note: long training time
 
-### Instructions:
+### Installation
+
+The code contained in this repository was written in HTML and Python 3, and requires the following Python packages: json, plotly, pandas, nltk, flask, sklearn, sqlalchemy, sys, numpy, re, pickle, warnings
+
+### Running Instructions
+
 1. Run the following commands in the project's root directory to set up your database and model.
 
     - To run ETL pipeline that cleans data and stores in database
@@ -32,3 +37,15 @@ Actions: load the data from SQLite database, splits the data into training and t
 #### Run.py : Flask Web App 
 
 Actions: display the visualization (the app accept messages from users and returns classification results for 36 categories of disaster events).
+
+#### Limitations and possible improvement
+
+The used datasets are very unbalanced, with very few positive examples for some message categories. This results in a low recall rate despite having high accuracy.
+
+This app must not be used for actual pridiction unless more data is collected.
+
+#### Screenshots
+
+#### Licensing and Acknowledgements
+
+This app was developed as part of the Udacity Data Scientist Nanodegree.
