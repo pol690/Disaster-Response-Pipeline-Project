@@ -36,7 +36,7 @@ Actions: load the data from SQLite database, splits the data into training and t
 
 Actions: display the visualization (the app accept messages from users and returns classification results for 36 categories of disaster events).
 
-#### Limitations and possible improvement
+### Limitations and possible improvement
 
 The used datasets are very unbalanced, with very few positive examples for some message categories. This results in a low recall rate despite having high accuracy.
 
@@ -44,12 +44,12 @@ This app must not be used for actual pridiction unless more data is collected.
 
 Additionally, the model training time can be improved.
 
-#### Screenshots
+### Screenshots
 
 ![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen1.png "Screenshot1")
 ![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen2.png "Screenshot2")
 ![Alt text](https://github.com/pol690/Disaster-Response-Pipeline-Project/blob/master/Screen3.png "Screenshot3")
 
-#### Licensing and Acknowledgements
+### Licensing and Acknowledgements
 
 This app was developed as part of the Udacity Data Scientist Nanodegree.
